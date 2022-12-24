@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RSP</title>
+</head>
+<body>
+<style>
+/* Сброс стилей */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+body {
+	margin: 0;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+/* Сброс стилей ^ */
+
+ body	{
+	background-image: url('{% static "img/background1.jpg" %}');
+	background-size: cover;
+	background-position: center center;
+	background-attachment: fixed;
+	overflow-x: hidden;
+ }
+ .container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100vh;
+ }
+ .score {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	padding: 3px;
+ }
+ .computer-score, .player-score {
+	color: white;
+	background-color: #8B7D62;
+	border-radius: 8px;
+	font-size: calc(16px + 16 * (100vw / 1280));
+	width: 21vw;
+  padding: 3px;
+ }
+ .buttons {
+	display: flex;
+	justify-content: space-between;
+	padding: 3px;
+ }
+ .btn {
+	background-color: #FFA640;
+	border-radius: 8px;
+	border: solid #331E00;
+	width: 14vw;
+	cursor: pointer;
+  opacity: 1;
+  transition: opacity .5s, visibility 0s;
+ }  
+ .btn:hover {
+	background-color: #331E00;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+ }
+ .btn:active {
+	background-color: #4d2d00;
+ }
+ .btn:disabled {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .5s, visibility 0s .5s;
+ }
+ textarea {
+	color: white;
+	background-color: rgba(0, 0, 0, 0.476);
+	width: 27vw;
+	height: 21vh;
+ }
+ .gestures {
+  display: flex;
+  justify-content: space-between;
+ }
+ .lgesture, .rgesture {
+  width: 35vw;
+ }
+ .rgesture{
+  transform: translateX(150%);
+  transition: 1s;
+ }
+ .rgesture.active {
+  transform: translateX(0);
+ }
+ .lgesture {
+  transform: translateX(-150%);
+  transition: 1s;
+ }
+ .lgesture.active {
+  transform: translateX(0);
+ }
+ .timer {
+  color: #331E00;
+  background-color: #FFA640;
+	border-radius: 8px;
+	border: solid #331E00;
+	width: 22vw;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 6vw;
+ }
+ .draw {
+  font-size: 6vw;
+}
+.win {
+  font-size: 6vw;
+  color: green;
+}
+.lose {
+  font-size: 4.2vw;
+  color: red;
+}
+    </style>    
+{% block content %}
+
+
+{% endblock %}
+
+</body>
+</html>

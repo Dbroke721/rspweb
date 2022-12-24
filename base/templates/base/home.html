@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <form method="POST" class="buttons">
+      {% csrf_token %}
+      <button id='rock' class="btn" type="submit" name="action" value="ROCK_ACTION">
+        <img src="{% static 'img/rock.png' %}">
+      </button>
+      <button id='scissors' class="btn" type="submit" name="action" value="SCISSORS_ACTION">
+        <img src="{% static 'img/scissors.png' %}">
+      </button>
+      <button id='paper' class="btn" type="submit" name="action" value="PAPER_ACTION">
+        <img src="{% static 'img/paper.png' %}">
+      </button>
+  </form>
+  <div class="gestures">
+    <img id='lgesture' class="lgesture" src="{% static left_gesture %}" alt>
+    <div class="timer">3</div>
+    <div id="result" style="display: none;">{{result}}</div>
+    <img id='rgesture' class="rgesture" src="{% static right_gesture %}" alt>
+  </div>
+	<div class="score">
+		<div class="player-score">Player: {{player_score}}</div>	
+		<textarea rows="10" cols="20" disabled>Battle log: 
+{{logs}}
+    </textarea>
+		<div class="computer-score">Computer: {{computer_score}}</div>
+	</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  rock.disabled = true;
+  scissors.disabled = true;
+  paper.disabled = true;
+  setTimeout(function enablebtn() { 
+    rock.disabled = false;
+    scissors.disabled = false;
+    paper.disabled = false;
+  }, 4000);
+  let timerId = null;
+  lgesture.classList.add('active');
+  function changesecond() {
+    let $seconds = document.querySelector('.timer');
+    $seconds.textContent = $seconds.textContent - 1;
+    if ($seconds.textContent === '1') {
+      rgesture.classList.add('active');
+      }else if ($seconds.textContent === '0') {
+        $seconds.textContent = result.textContent
+        if ($seconds.textContent === 'Победа!') {
+          $seconds.classList.add('win');
+        } else if($seconds.textContent === 'Поражение!'){
+          $seconds.classList.add('lose');
+        } else{
+          $seconds.classList.add('draw');
+        }
+        clearInterval(timerId);
+      }
+  }
+  timerId = setInterval(changesecond, 1000);
+  });
+</script>
+{% endblock content%}
